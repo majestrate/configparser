@@ -327,6 +327,14 @@ func (s *Section) ValueOf(option string) string {
 	return s.options[option]
 }
 
+func (s *Section) Get(option, fallback string) string {
+	v := s.ValueOf(option)
+	if v == "" {
+		return fallback
+	}
+	return v
+}
+
 // SetValueFor sets the value for the specified option and returns the old value.
 func (s *Section) SetValueFor(option string, value string) string {
 	s.mutex.Lock()
